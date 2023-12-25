@@ -1,0 +1,9 @@
+import tabula
+import pandas as pd
+pdf_path = "C:/Users/abhic/Downloads/Gross Server Cashout.pdf"
+tables = tabula.read_pdf(pdf_path, pages='all', multiple_tables=True)
+excel_writer = pd.ExcelWriter('output.xlsx')
+for i, table in enumerate(tables):
+    df = pd.DataFrame(table)
+    df.to_excel(excel_writer, sheet_name=f'Sheet{i + 1}', index=False)
+excel_writer._save()
